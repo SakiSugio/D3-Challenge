@@ -21,7 +21,7 @@ var chartGroup = svg.append("g")
   .attr("transform", `translate(${margin.left}, ${margin.top})`);
 
   // Import Data
-  d3.csv("data.csv").then(function (healthData) {
+  d3.csv("/assets/data/data.csv").then(function (healthData) {
 
     // Parse Data/Cast as numbers
     healthData.forEach(function(data) {
@@ -35,7 +35,7 @@ var chartGroup = svg.append("g")
         .range([0, width]);
 
     var yLinearScale = d3.scaleLinear()
-        .domain([0, d3.max(healthData, d = d.healthcare)])
+        .domain([0, d3.max(healthData, d => d.healthcare)])
         .range([height, 0]);
 
     // Create axis functions
@@ -50,6 +50,21 @@ var chartGroup = svg.append("g")
     chartGroup.append("g")
         .call(leftAxis);
 
+    // Create circles
+    var circleGroup = chartGroup.selectAll("circle")
+    .data(healthData)
+    .enter()
+    .append("circle")
+    .attr("cx", d => xLinearScale(d.poverty))
+    .attr("cy", d => yLinearScale(d.healthcare))
+    .attr("r", "15")
+    .attr("fill", "blue")
+    .attr("opacity", ".5");
+
+    //initialize tool tip
+    var toolTip = d3.tip()
+        .attr("class", "tooltip")
+        .offset([])
 
 
   })
