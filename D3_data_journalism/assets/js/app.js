@@ -22,13 +22,13 @@ var chartGroup = svg.append("g")
 
   // Import Data
   d3.csv("/assets/data/data.csv").then(function (healthData) {
-
+    
     // Parse Data/Cast as numbers
     healthData.forEach(function(data) {
         data.poverty = +data.poverty;
         data.healthcare = +data.healthcare;
     });
-    
+    //console.log(healthData)
     // Create scale functions
     var xLinearScale = d3.scaleLinear()
         .domain([20, d3.max(healthData, d => d.poverty)])
@@ -68,3 +68,4 @@ var chartGroup = svg.append("g")
 
 
   })
+ 
