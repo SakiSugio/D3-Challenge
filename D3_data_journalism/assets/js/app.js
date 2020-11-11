@@ -12,7 +12,7 @@ var width = svgWidth - margin.left - margin.right;
 var height = svgHeight - margin.top - margin.bottom;
 
 // Create an SVG wrapper, append an SVG group that will hold our chart, and shift the latter by left and top margins.
-var svg = d3.select(".scatter")
+var svg = d3.select("#scatter")
   .append("svg")
   .attr("width", svgWidth)
   .attr("height", svgHeight);
@@ -28,7 +28,7 @@ var chartGroup = svg.append("g")
         data.poverty = +data.poverty;
         data.healthcare = +data.healthcare;
     });
-    //console.log(healthData)
+    console.log(healthData)
     // Create scale functions
     var xLinearScale = d3.scaleLinear()
         .domain([20, d3.max(healthData, d => d.poverty)])
@@ -64,8 +64,37 @@ var chartGroup = svg.append("g")
     //initialize tool tip
     var toolTip = d3.tip()
         .attr("class", "tooltip")
-        .offset([])
+        .offset([80, -60])
+        .html(function(d) {
+            return (`${d.state}<br>Poverty: ${d.poverty}<br>Healthcare: ${d.healthcare}`);
+        });
 
+    // Create tooltip in the chart
+    chartGroup.call(toolTip);
 
-  })
+    // Create event listeners to display ad hide anf tooltip
+    circleGroup.on("click", function(data) {
+        toolTip.show(data, this);
+    })
+        // onmouseout event
+        .on("mouseout", function(data, index) {
+            toolTip.hide(data);
+        });
+    
+    // Create axes labels
+    chartGroup.append("text")
+        .attr("transform", "rotate(-90)")
+        .attr("y", 0 - margin.left + 40)
+        .attr("x", 0 - (height / 2))
+        .attr("dy", "1em")
+        .attr("class", "axisText")
+        .text("Healthcare");
+
+    chartGroup.append("text")
+        .attr("transform", `translate(${width / 2}, ${height + margin.top + 30})`)
+        .attr("class", "axisText")
+        .text("Poverty");
+    }).catch(function(error) {
+        console.log(error);
+    });
  
