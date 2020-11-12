@@ -28,10 +28,10 @@ var chartGroup = svg.append("g")
         data.poverty = +data.poverty;
         data.healthcare = +data.healthcare;
     });
-    console.log(healthData)
+    //console.log(healthData)
     // Create scale functions
     var xLinearScale = d3.scaleLinear()
-        .domain([20, d3.max(healthData, d => d.poverty)])
+        .domain([0, d3.max(healthData, d => d.poverty)])
         .range([0, width]);
 
     var yLinearScale = d3.scaleLinear()
@@ -63,7 +63,7 @@ var chartGroup = svg.append("g")
 
     //initialize tool tip
     var toolTip = d3.tip()
-        .attr("class", "tooltip")
+        .attr("class", "d3-tip")
         .offset([80, -60])
         .html(function(d) {
             return (`${d.state}<br>Poverty: ${d.poverty}<br>Healthcare: ${d.healthcare}`);
@@ -87,12 +87,15 @@ var chartGroup = svg.append("g")
         .attr("y", 0 - margin.left + 40)
         .attr("x", 0 - (height / 2))
         .attr("dy", "1em")
-        .attr("class", "axisText")
+        .classed("aText" , true)
+        //.attr("class", "stateText")
         .text("Healthcare");
 
     chartGroup.append("text")
+        //.attr("transform", `translate(${width / 2}, ${height + margin.top + 30})`)
         .attr("transform", `translate(${width / 2}, ${height + margin.top + 30})`)
-        .attr("class", "axisText")
+        .classed("aText" , true)
+        //.attr("class", "stateText")
         .text("Poverty");
     }).catch(function(error) {
         console.log(error);
