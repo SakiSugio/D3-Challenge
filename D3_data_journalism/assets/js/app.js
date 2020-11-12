@@ -88,14 +88,11 @@ var chartGroup = svg.append("g")
         .attr("x", 0 - (height / 2))
         .attr("dy", "1em")
         .classed("aText" , true)
-        //.attr("class", "stateText")
         .text("Healthcare");
 
     chartGroup.append("text")
-        //.attr("transform", `translate(${width / 2}, ${height + margin.top + 30})`)
         .attr("transform", `translate(${width / 2}, ${height + margin.top + 30})`)
         .classed("aText" , true)
-        //.attr("class", "stateText")
         .text("Poverty");
     }).catch(function(error) {
         console.log(error);
