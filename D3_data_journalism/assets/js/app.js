@@ -21,7 +21,7 @@ var chartGroup = svg.append("g")
   .attr("transform", `translate(${margin.left}, ${margin.top})`);
 
   // Import Data
-  d3.csv("../data/data.csv").then(function (healthData) {
+  d3.csv("../assets/data/data.csv").then(function (healthData) {
     
     // Parse Data/Cast as numbers
     healthData.forEach(function(data) {
