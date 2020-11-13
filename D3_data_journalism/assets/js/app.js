@@ -21,7 +21,7 @@ var chartGroup = svg.append("g")
   .attr("transform", `translate(${margin.left}, ${margin.top})`);
 
   // Import Data
-  d3.csv("../assets/data/data.csv").then(function (healthData) {
+  d3.csv("../data/data.csv").then(function (healthData) {
     
     // Parse Data/Cast as numbers
     healthData.forEach(function(data) {
@@ -51,7 +51,7 @@ var chartGroup = svg.append("g")
         .call(leftAxis);
 
     // Create circles
-    var circleGroup = chartGroup.selectAll("circle")
+    var circleGroup = chartGroup.selectAll("stateCircle")
     .data(healthData)
     .enter()
     .append("circle")
@@ -61,10 +61,16 @@ var chartGroup = svg.append("g")
     .attr("r", "15")
     .attr("opacity", ".5");
 
-     /* Create the text for each block */
-    //  chartGroup.append("text")
-    // .attr("dx", function(d){return -20})
-    // .text(function(d){return d.abbr})
+    // Create text in circles
+    var textGroup = chartGroup.selectAll(".stateText")
+    .data(healthData)
+    .enter()
+    .append("text")
+    .classed("stateText", true)
+    .attr("x", d => xLinearScale(d.poverty))
+    .attr("y", d => yLinearScale(d.healthcare))
+    .attr("dy", "5")
+    .text(function(d){return d.abbr});
 
     //initialize tool tip
     var toolTip = d3.tip()
