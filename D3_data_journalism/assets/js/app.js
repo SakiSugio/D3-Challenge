@@ -55,11 +55,16 @@ var chartGroup = svg.append("g")
     .data(healthData)
     .enter()
     .append("circle")
+    .classed("stateCircle", true)
     .attr("cx", d => xLinearScale(d.poverty))
     .attr("cy", d => yLinearScale(d.healthcare))
     .attr("r", "15")
-    .attr("fill", "blue")
     .attr("opacity", ".5");
+
+     /* Create the text for each block */
+    //  chartGroup.append("text")
+    // .attr("dx", function(d){return -20})
+    // .text(function(d){return d.abbr})
 
     //initialize tool tip
     var toolTip = d3.tip()
