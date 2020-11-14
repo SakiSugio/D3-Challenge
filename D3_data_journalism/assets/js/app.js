@@ -42,7 +42,7 @@ var chartGroup = svg.append("g")
         .range([0, width]);
 
     var yLinearScale = d3.scaleLinear()
-        .domain([0, d3.max(healthData, d => d.healthcare)])
+        .domain([3, d3.max(healthData, d => d.healthcare)])
         .range([height, 0]);
 
     // Create axis functions
@@ -65,8 +65,7 @@ var chartGroup = svg.append("g")
     .classed("stateCircle", true)
     .attr("cx", d => xLinearScale(d.poverty))
     .attr("cy", d => yLinearScale(d.healthcare))
-    .attr("r", "15")
-    .attr("opacity", ".5");
+    .attr("r", "15");
 
     // Create text in circles
     var textGroup = chartGroup.selectAll(".stateText")
@@ -106,7 +105,7 @@ var chartGroup = svg.append("g")
         .attr("x", 0 - (height / 2))
         .attr("dy", "1em")
         .classed("aText" , true)
-        .text("Healthcare");
+        .text("Lacks Healthcare (%)");
 
     chartGroup.append("text")
         .attr("transform", `translate(${width / 2}, ${height + margin.top + 30})`)
