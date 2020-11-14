@@ -12,23 +12,23 @@ var width = svgWidth - margin.left - margin.right;
 var height = svgHeight - margin.top - margin.bottom;
 
 // Create an SVG wrapper, append an SVG group that will hold our chart, and shift the latter by left and top margins.
-var svg = d3.select("#scatter")
-    .append("div")
-    .classed("chart", true)
-    .append("svg")
-    .attr("width", svgWidth)
-    .attr("height", svgHeight);
-
 // var svg = d3.select("#scatter")
-//   .append("svg")
-//   .attr("width", svgWidth)
-//   .attr("height", svgHeight);
+//     .append("div")
+//     .classed("chart", true)
+//     .append("svg")
+//     .attr("width", svgWidth)
+//     .attr("height", svgHeight);
+
+var svg = d3.select("#scatter")
+  .append("svg")
+  .attr("width", svgWidth)
+  .attr("height", svgHeight);
 
 var chartGroup = svg.append("g")
   .attr("transform", `translate(${margin.left}, ${margin.top})`);
 
   // Import Data
-  d3.csv("../assets/data/data.csv").then(function (healthData) {
+  d3.csv("/assets/data/data.csv").then(function (healthData) {
     
     // Parse Data/Cast as numbers
     healthData.forEach(function(data) {
@@ -38,7 +38,7 @@ var chartGroup = svg.append("g")
     //console.log(healthData)
     // Create scale functions
     var xLinearScale = d3.scaleLinear()
-        .domain([0, d3.max(healthData, d => d.poverty)])
+        .domain([8.5, d3.max(healthData, d => d.poverty)])
         .range([0, width]);
 
     var yLinearScale = d3.scaleLinear()
@@ -102,7 +102,7 @@ var chartGroup = svg.append("g")
     // Create axes labels
     chartGroup.append("text")
         .attr("transform", "rotate(-90)")
-        .attr("y", 0 - margin.left + 40)
+        .attr("y", 0 - margin.left + 40 )
         .attr("x", 0 - (height / 2))
         .attr("dy", "1em")
         .classed("aText" , true)
