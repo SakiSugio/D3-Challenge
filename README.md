@@ -7,3 +7,5 @@ Analyzing the current trends shaping people's lives, as well as creating charts,
 * Pull in the data from data.csv by using the d3.csv function.
 * Create a scatter plot between two of the data variables - Healthcare vs. Poverty
 * Create a scatter plot that represents each state with circle elements
+
+![alt text](https://github.com/SakiSugio/D3-Challenge/blob/main/image/d3.png)
